@@ -47,8 +47,13 @@ def create(request):
 
         if form.is_valid():
             n = form.cleaned_data['name']
-            t = ToDoList(name=n)
-            t.save()
+            ls = ToDoList.objects.filter(name=n)
+
+            if ls:
+                t = ls[0]
+            else:
+                t = ToDoList(name=n)
+                t.save()
 
         return HttpResponseRedirect("/%i" %t.id)
 
