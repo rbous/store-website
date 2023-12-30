@@ -22,5 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('playground/', include('playground.urls')),
     path("", views.home_page, name="home"),
-    path('<int:id>', views.index, name='index')
+    path('<int:id>', views.index, name='index'),
+    path('create/', views.create, name='create'),
 ]
