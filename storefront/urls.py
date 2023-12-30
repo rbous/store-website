@@ -21,5 +21,5 @@ from playground import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('playground/', include('playground.urls')),
-    path('', views.home_page),
+    path("", views.home_page, name="home"),
 ]
