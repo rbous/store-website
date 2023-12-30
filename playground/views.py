@@ -13,5 +13,6 @@ def home_page(request):
     return render(request, "home.html", {})
 
 
-def index(request):
-    return render(request, "base.html", {})
+def index(request, id):
+    ls = ToDoList.objects.get(id=id)
+    return render(request, "list.html", {"ls": ls})

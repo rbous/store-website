@@ -2,9 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Rayane's Website</title>
+    <title>{% block title %}Rayane's Website{% endblock %}</title>
 </head>
 <body>
-    <p>Base template</p>
+    <div id="content", name="content">
+    {% block content %}
+    {% endblock %}
+    </div>
 </body>
 </html>
