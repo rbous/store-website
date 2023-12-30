@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}List Search{% endblock %}
+
+{% block content %}
+<h1>List Search</h1>
+<form method="get" action="/search/">
+    {% csrf_token %}
+    {% for item in form %}
+        {{item}}
+    {% endfor %}
+    <button type="submit" name="save">Search</button>
+    {% if exists == False %}
+        <p>
+            No lists found with this name. Please try again.
+        </p>
+    {% endif %}
+</form>
+{% endblock %}

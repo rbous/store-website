@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import ToDoList, Item
-from .forms import CreateNewList
+from .forms import CreateNewList, SearchForList
 
 from django.views.decorators.csrf import csrf_exempt
 
@@ -41,7 +41,6 @@ def index(request, id):
     return render(request, "list.html", {"ls": ls})
 
 
-@csrf_exempt
 def create(request):
     if request.method == 'POST':
         form = CreateNewList(request.POST)
@@ -56,3 +55,29 @@ def create(request):
     else:
         form = CreateNewList()
     return render(request, "create.html", {'form': form})
+
+
+def search(request):
+
+    if request.method == 'GET':
+        form = SearchForList(request.GET)
+
+        if str(form)[177:181] == "true":
+            form = SearchForList()
+            return render(request, "search.html", {'exists': None, 'form': form})
+
+        if form.is_valid():
+            n = form.cleaned_data['name']
+
+        else:
+            n = ''
+
+        todolist = ToDoList.objects.filter(name=n)
+
+        if todolist:
+
+            return HttpResponseRedirect("/%i" % todolist[0].id)
+
+        return render(request, "search.html", {'exists': False, 'form': form})
+
+

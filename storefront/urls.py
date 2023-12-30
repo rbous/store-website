@@ -24,4 +24,5 @@ urlpatterns = [
     path("", views.home_page, name="home"),
     path('<int:id>', views.index, name='index'),
     path('create/', views.create, name='create'),
+    path('search/', views.search, name='search'),
 ]
